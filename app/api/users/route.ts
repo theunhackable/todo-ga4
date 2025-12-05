@@ -16,6 +16,5 @@ export async function POST(req: Request) {
       errors: flattenErrors,
     });
   }
-
-  return data;
+  return NextResponse.json({});
 }
