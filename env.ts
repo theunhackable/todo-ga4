@@ -1,3 +1,4 @@
+import "server-only";
 import z4 from "zod/v4";
 const envSchema = z4.object({
   TURSO_CONNECTION_URL: z4.string(),
@@ -5,13 +6,11 @@ const envSchema = z4.object({
   JOSE_TOKEN: z4.string(),
 });
 
-type Env = z4.infer<typeof envSchema>;
-
-const { success, data } = envSchema.safeParse(process.env);
+const { success, data, error } = envSchema.safeParse(process.env);
 
 if (!success) {
   console.error("Error parsing env");
-  process.exit(1);
+  console.error("error", error);
 }
 
 export const env = data;

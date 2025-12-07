@@ -2,7 +2,7 @@ import { sql } from "drizzle-orm";
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 import { users } from "./users";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
-import z4 from "zod/v4";
+import { z } from "zod";
 
 export const todos = sqliteTable("todos", {
   id: integer("id").primaryKey(),
@@ -21,7 +21,10 @@ export const todos = sqliteTable("todos", {
 });
 
 export const todoSelectSchema = createSelectSchema(todos);
-export const todoInsertSchema = createInsertSchema(todos).omit({ id: true });
+export const todoInsertSchema = createInsertSchema(todos).omit({
+  id: true,
+  userId: true,
+});
 
-export type TodoelectType = z4.infer<typeof todoSelectSchema>;
-export type TodoInsertType = z4.infer<typeof todoInsertSchema>;
+export type TodoSelectType = z.infer<typeof todoSelectSchema>;
+export type TodoInsertType = z.infer<typeof todoInsertSchema>;

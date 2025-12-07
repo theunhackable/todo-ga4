@@ -4,6 +4,7 @@ import "./globals.css";
 import NavBar from "@/components/NavBar";
 import { ThemeProvider } from "next-themes";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,8 +39,9 @@ export default function RootLayout({
         >
           <NavBar />
           {children}
+          <Toaster richColors={true} position="top-center" />
         </ThemeProvider>
-        <GoogleAnalytics gaId="G-2NFVP6J2G1" />
+        <GoogleAnalytics gaId="G-B6ZFBX54NH" />
       </body>
     </html>
   );
