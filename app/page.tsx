@@ -3,15 +3,16 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { TodoInsertType } from "@/db/schemas";
 import { TodoInputs } from "@/types";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-function TodoContainer({ todo }: { todo: TodoInputs }) {
+function TodoContainer({ todo }: { todo: TodoInsertType }) {
   return (
     <div>
-      <h3 className="text-xl font-medium"> {todo.todoHeader}</h3>
-      <p className="text-gray-500"> {todo.todoDesc}</p>
+      <h3 className="text-xl font-medium"> {todo.title}</h3>
+      <p className="text-gray-500"> {todo.description}</p>
     </div>
   );
 }
@@ -20,11 +21,11 @@ export default function Home() {
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm<TodoInputs>();
+  } = useForm<TodoInsertType>();
 
-  const [todos, setTodos] = useState<TodoInputs[]>();
+  const [todos, setTodos] = useState<TodoInsertType[]>();
 
-  const onSubmit: SubmitHandler<TodoInputs> = async (data) => {
+  const onSubmit: SubmitHandler<TodoInsertType> = async (data) => {
     console.log(data);
     const res = await fetch("/api/todos", {
       method: "POST",
@@ -50,14 +51,14 @@ export default function Home() {
         className="flex flex-col gap-5 space-x-2"
       >
         <div className="flex flex-col gap-2">
-          <Label htmlFor="todoHeader">Title*</Label>
-          <Input {...register("todoHeader", { required: true })} />
+          <Label htmlFor="title">Title*</Label>
+          <Input {...register("title", { required: true })} />
         </div>
         <div className="flex flex-col gap-2">
-          <Label htmlFor="todoDesc">
+          <Label htmlFor="description">
             Description <i className="text-gray-400">(optional)</i>
           </Label>
-          <Textarea {...register("todoDesc", { required: false })} />
+          <Textarea {...register("description", { required: false })} />
         </div>
         <Button type="submit">Submit</Button>
       </form>
