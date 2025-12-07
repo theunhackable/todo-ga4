@@ -11,7 +11,6 @@ const { success, data, error } = envSchema.safeParse(process.env);
 if (!success) {
   console.error("Error parsing env");
   console.error("error", error);
-  process.exit(1);
 }
 
-export const env = data;
+export const env = data!;
