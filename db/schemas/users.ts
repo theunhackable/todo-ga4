@@ -21,7 +21,7 @@ export const userSelectSchema = createSelectSchema(users);
 export const userInsertSchema = createInsertSchema(users, {
   name: z.string().min(1),
   age: z.coerce.number().min(18).max(150),
-  email: z.string().email(),
+  email: z.email(),
   password: z.string().min(8, "Password must be at least 8 characters long"),
 })
   .omit({ id: true })

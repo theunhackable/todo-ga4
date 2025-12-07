@@ -61,10 +61,19 @@ function SignUpPage() {
             {errors.email && <p> {errors.email.message} </p>}
           </div>
           <div className="flex flex-col gap-2">
-            <Label htmlFor="hashedPassword">Password:</Label>
+            <Label htmlFor="password">Password:</Label>
             <Input
               {...register("password")}
               id="password"
+              type="password"
+              placeholder="********"
+            />
+            {errors.password && <p> {errors.password.message} </p>}
+          </div>
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="confirmPassword">Password:</Label>
+            <Input
+              {...register("confirmPassword")}
               type="password"
               placeholder="********"
             />
